@@ -1,0 +1,243 @@
+{
+    "app-id": "org.gnome.Sdk",
+    "version": "3.20",
+    "runtime": "org.freedeskop.Platform",
+    "runtime-version": "1.2",
+    "writable-sdk": true,
+    "sdk": "org.freedesktop.Sdk",
+    "finish-args": ["--share=ipc", "--socket=x11", "--socket=pulseaudio", "--filesystem=host" ],
+    "build-options" : {
+        "cflags": "-O2 -g",
+        "cxxflags": "-O2 -g",
+        "prefix": "/usr",
+        "env": {
+            "V": "1"
+        }
+    },
+    "cleanup": [],
+    "modules": [
+        {
+            "name": "gnome-common",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/gnome-common"
+                }
+            ]
+        },
+        {
+            "name": "adwaita-icon-theme",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/adwaita-icon-theme"
+                }
+            ]
+        },
+        {
+            "name": "cantarell-fonts",
+            "config-opts": [ "--disable-source-rebuild"],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/cantarell-fonts"
+                }
+            ]
+        },
+        {
+            "name": "glib",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/glib"
+                }
+            ]
+        },
+        {
+            "name": "gobject-introspection",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/gobject-introspection"
+                }
+            ]
+        },
+        {
+            "name": "glib-networking",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/glib-networking"
+                }
+            ]
+        },
+        {
+            "name": "vala-bootstrap",
+            "config-opts": [ "--disable-build-from-vala",
+                             "--disable-vapigen" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/vala-bootstrap"
+                }
+            ]
+        },
+        {
+            "name": "vala",
+            "config-opts": [ "--enable-vapigen", "--enable-unversioned" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/vala"
+                }
+            ]
+        },
+        {
+            "name": "libsoup",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/libsoup"
+                }
+            ]
+        },
+        {
+            "name": "dbus-glib",
+            "config-opts": [ "--disable-gtk-doc" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://anongit.freedesktop.org/git/dbus/dbus-glib"
+                }
+            ]
+        },
+        {
+            "name": "json-glib",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/json-glib"
+                }
+            ]
+        },
+        {
+            "name": "pango",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/pango"
+                }
+            ]
+        },
+        {
+            "name": "atk",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/atk"
+                }
+            ]
+        },
+        {
+            "name": "at-spi2-core",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/at-spi2-core"
+                }
+            ]
+        },
+        {
+            "name": "at-spi2-atk",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/at-spi2-atk"
+                }
+            ]
+        },
+        {
+            "name": "gdk-pixbuf",
+            "config-opts": [ "--with-x11",
+                             "--without-libjasper",
+                             "--with-included-loaders=png"],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/gdk-pixbuf"
+                }
+            ]
+        },
+        {
+            "name": "libcroco",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/libcroco"
+                }
+            ]
+        },
+        {
+            "name": "librsvg",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/librsvg"
+                }
+            ]
+        },
+        {
+            "name": "gtk3",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/gtk+"
+                }
+            ]
+        },
+        {
+            "name": "gtk2",
+            "config-opts": ["--disable-gtk-doc",
+                            "--disable-man",
+                            "--with-xinput=xfree"],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/gtk+",
+                    "branch": "gtk-2-24"
+                }
+            ]
+        },
+        {
+            "name": "libsecret",
+            "config-opts": ["--disable-static", "--disable-gtk-doc", "--disable-manpages"],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/libsecret"
+                }
+            ]
+        },
+        {
+            "name": "dconf",
+            "config-opts": ["--disable-static", "--disable-man"],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/dconf"
+                }
+            ]
+        },
+        {
+            "name": "gvfs",
+            "config-opts": [ "--disable-hal", "--disable-gdu", "--disable-gcr", "--disable-obexftp",
+                             "--disable-avahi", "--disable-documentation" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/gvfs"
+                }
+            ]
+        }
+    ]
+}

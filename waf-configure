@@ -1,0 +1,12 @@
+#!/bin/sh
+
+echo hej
+python3 ./waf configure "$@"
+
+cat <<EOF > Makefile
+all:
+	python3 ./waf build
+
+install:
+	python3 ./waf install
+EOF

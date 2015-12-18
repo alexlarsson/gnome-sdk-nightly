@@ -1,11 +1,11 @@
 {
     "app-id": "org.gnome.Sdk",
-    "version": "3.20",
+    "branch": "3.19",
     "runtime": "org.freedeskop.Platform",
     "runtime-version": "1.2",
     "writable-sdk": true,
     "sdk": "org.freedesktop.Sdk",
-    "finish-args": ["--share=ipc", "--socket=x11", "--socket=pulseaudio", "--filesystem=host" ],
+    "finish-args": ["--no-exports", "--share=ipc", "--socket=x11", "--socket=pulseaudio", "--filesystem=host" ],
     "build-options" : {
         "cflags": "-O2 -g",
         "cxxflags": "-O2 -g",
@@ -17,11 +17,39 @@
     "cleanup": [],
     "modules": [
         {
+            "name": "wayland-protocols",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://anongit.freedesktop.org/wayland/wayland-protocols"
+                }
+            ]
+        },
+        {
             "name": "gnome-common",
             "sources": [
                 {
                     "type": "git",
                     "url": "git://git.gnome.org/gnome-common"
+                }
+            ]
+        },
+        {
+            "name": "yelp-xsl",
+            "config-opts": ["--disable-doc"],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/yelp-xsl"
+                }
+            ]
+        },
+        {
+            "name": "yelp-tools",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/yelp-tools"
                 }
             ]
         },
@@ -93,11 +121,30 @@
             ]
         },
         {
+            "name": "dconf",
+            "config-opts": ["--disable-static", "--disable-man"],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/dconf"
+                }
+            ]
+        },
+        {
             "name": "libsoup",
             "sources": [
                 {
                     "type": "git",
                     "url": "git://git.gnome.org/libsoup"
+                }
+            ]
+        },
+        {
+            "name": "gsettings-desktop-schemas",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/gsettings-desktop-schemas"
                 }
             ]
         },
@@ -117,6 +164,28 @@
                 {
                     "type": "git",
                     "url": "git://git.gnome.org/json-glib"
+                }
+            ]
+        },
+        {
+            "name": "libdatrie",
+            "config-opts": ["--disable-static"],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://linux.thai.net/pub/thailinux/software/libthai/libdatrie-0.2.9.tar.xz",
+                    "sha256": "d980713e7ad8e19cf3b54ee0173782b94332af8e7e4e936dde01d2cd72e1da1d"
+                }
+            ]
+        },
+        {
+            "name": "libthai",
+            "config-opts": ["--disable-static"],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://linux.thai.net/pub/thailinux/software/libthai/libthai-0.1.22.tar.xz",
+                    "sha256": "bdb291dcc3a6784e86b1b342ec75005e9ab487f8c1decc7c3e7d18d1bbc9b7b7"
                 }
             ]
         },
@@ -187,15 +256,6 @@
             ]
         },
         {
-            "name": "gtk3",
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "git://git.gnome.org/gtk+"
-                }
-            ]
-        },
-        {
             "name": "gtk2",
             "config-opts": ["--disable-gtk-doc",
                             "--disable-man",
@@ -205,6 +265,69 @@
                     "type": "git",
                     "url": "git://git.gnome.org/gtk+",
                     "branch": "gtk-2-24"
+                }
+            ]
+        },
+        {
+            "name": "gtk3",
+            "config-opts": [ "--enable-xkb",
+                             "--enable-xinerama",
+                             "--enable-xrandr",
+                             "--enable-xfixes",
+                             "--enable-xcomposite",
+                             "--enable-xdamage",
+                             "--enable-x11-backend",
+                             "--enable-wayland-backend" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/gtk+"
+                }
+            ]
+        },
+        {
+            "name": "gstreamer",
+            "config-opts": ["--disable-gtk-doc", "--enable-debug" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://anongit.freedesktop.org/gstreamer/gstreamer"
+                }
+            ]
+        },
+        {
+            "name": "gstreamer-plugins-base",
+            "config-opts": ["--disable-gtk-doc", "--enable-experimental", "--enable-orc" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://anongit.freedesktop.org/gstreamer/gst-plugins-base"
+                }
+            ]
+        },
+        {
+            "name": "gstreamer-plugins-good",
+            "config-opts": ["--disable-gtk-doc", "--enable-experimental", "--enable-orc" ,
+                            "--disable-monoscope",
+                            "--disable-aalib",
+                            "--enable-cairo",
+                            "--disable-libcaca",
+                            "--disable-jack",
+                            "--with-default-visualizer=autoaudiosink" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://anongit.freedesktop.org/gstreamer/gst-plugins-good"
+                }
+            ]
+        },
+        {
+            "name": "gstreamer-plugins-bad",
+            "config-opts": ["--disable-gtk-doc", "--enable-experimental", "--enable-orc" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://anongit.freedesktop.org/gstreamer/gst-plugins-bad"
                 }
             ]
         },
@@ -219,12 +342,11 @@
             ]
         },
         {
-            "name": "dconf",
-            "config-opts": ["--disable-static", "--disable-man"],
+            "name": "libnotify",
             "sources": [
                 {
                     "type": "git",
-                    "url": "git://git.gnome.org/dconf"
+                    "url": "git://git.gnome.org/libnotify"
                 }
             ]
         },
@@ -236,6 +358,157 @@
                 {
                     "type": "git",
                     "url": "git://git.gnome.org/gvfs"
+                }
+            ]
+        },
+        {
+            "name": "enchant",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://www.abisource.com/downloads/enchant/1.6.0/enchant-1.6.0.tar.gz",
+                    "sha256": "2fac9e7be7e9424b2c5570d8affe568db39f7572c10ed48d4e13cddf03f7097f"
+                }
+            ]
+        },
+        {
+            "name": "hyphen",
+            "config-opts": ["--disable-static"],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://downloads.sourceforge.net/hunspell/hyphen-2.8.8.tar.gz",
+                    "sha256": "304636d4eccd81a14b6914d07b84c79ebb815288c76fe027b9ebff6ff24d5705"
+                }
+            ]
+        },
+        {
+            "name": "gcab",
+            "config-opts": ["--disable-static", "--enable-fast-install"],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/gcab"
+                }
+            ]
+        },
+        {
+            "name": "gnome-themes-standard",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/gnome-themes-standard"
+                }
+            ]
+        },
+        {
+            "name": "mozjs24",
+            "config-opts": [  "--disable-static",
+                              "--with-system-nspr",
+                              "--enable-threadsafe",
+                              "--enable-readline",
+                              "--enable-xterm-updates"],
+            "subdir": "js/src",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://ftp.mozilla.org/pub/mozilla.org/js/mozjs-24.2.0.tar.bz2",
+                    "sha256": "e62f3f331ddd90df1e238c09d61a505c516fe9fd8c5c95336611d191d18437d8"
+                }
+            ]
+        },
+        {
+            "name": "gjs",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/gjs"
+                }
+            ]
+        },
+        {
+            "name": "libappstream-glib",
+            "config-opts": ["--disable-gtk-doc",
+                            "--disable-dep11",
+                            "--disable-static",
+                            "--disable-silent-rules",
+                            "--disable-dependency-tracking" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://github.com/hughsie/appstream-glib.git"
+                }
+            ]
+        },
+        {
+            "name": "vte",
+            "config-opts": ["--disable-gtk-doc",
+                            "--disable-gnome-pty-helper",
+                            "--disable-static",
+                            "--with-gtk=3.0",
+                            "--enable-introspection",
+                            "--without-pcre2"],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/vte"
+                }
+            ]
+        },
+        {
+            "name": "zenity",
+            "config-opts": ["--disable-webkitgtk" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/zenity"
+                }
+            ]
+        },
+        {
+            "name": "pycairo",
+            "build-options" : {
+                "env": {
+                    "PYTHON": "/usr/bin/python3"
+                }
+            },
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://anongit.freedesktop.org/pycairo"
+                },
+                {
+                    "type": "file",
+                    "path": "waf-configure",
+                    "dest-filename": "configure"
+                }
+            ]
+        },
+        {
+            "name": "pygobject",
+            "build-options" : {
+                "env": {
+                    "PYTHON": "/usr/bin/python3"
+                }
+            },
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/pygobject"
+                }
+            ]
+        },
+        {
+            "name": "python-gstreamer",
+            "build-options" : {
+                "env": {
+                    "PYTHON": "/usr/bin/python3"
+                }
+            },
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://anongit.freedesktop.org/gstreamer/gst-python"
                 }
             ]
         }

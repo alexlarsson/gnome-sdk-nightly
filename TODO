@@ -1,0 +1,3 @@
+add webkitgtk
+convert sdk to platform
+make xdg-app-builder strip in /usr

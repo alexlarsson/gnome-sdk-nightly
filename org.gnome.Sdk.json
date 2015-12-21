@@ -1,6 +1,6 @@
 {
     "app-id": "org.gnome.Sdk",
-    "branch": "3.19",
+    "branch": "master",
     "runtime": "org.freedeskop.Platform",
     "runtime-version": "1.2",
     "writable-sdk": true,

@@ -6,7 +6,13 @@
     "writable-sdk": true,
     "sdk": "org.freedesktop.Sdk",
     "finish-args": ["--no-exports", "--share=ipc", "--socket=x11", "--socket=pulseaudio", "--filesystem=host" ],
-    "cleanup": [ "/cache", "/man", "/share/man", "/share/gtk-doc", "/share/devhelp", "*.la"],
+    "cleanup": [ "/cache",
+                 "/man",
+                 "/share/man",
+                 "/share/gtk-doc",
+                 "/share/devhelp",
+                 "/usr/lib/systemd",
+                 "*.la", "*.a"],
     "build-options" : {
         "cflags": "-O2 -g",
         "cxxflags": "-O2 -g",
@@ -103,6 +109,11 @@
         },
         {
             "name": "vala-bootstrap",
+            "cleanup": [ "/bin/*-0.16",
+                         "/usr/lib/*-0.16*",
+                         "/usr/lib/pkgconfig/*",
+                         "/usr/include/vala-0.16",
+                         "/usr/share/vala-0.16" ],
             "config-opts": [ "--disable-build-from-vala",
                              "--disable-vapigen" ],
             "sources": [
@@ -125,6 +136,7 @@
         {
             "name": "dconf",
             "config-opts": ["--disable-static", "--disable-man"],
+            "cleanup": [ "/usr/libexec/dconf-service", "/usr/share/dbus-1/services/*" ],
             "sources": [
                 {
                     "type": "git",
@@ -153,7 +165,7 @@
         },
         {
             "name": "dbus-glib",
-            "config-opts": [ "--disable-gtk-doc" ],
+            "config-opts": [ "--disable-static", "--disable-gtk-doc" ],
             "sources": [
                 {
                     "type": "git",

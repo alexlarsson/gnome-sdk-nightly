@@ -7,7 +7,6 @@
     "sdk": "org.freedesktop.Sdk",
     "finish-args": ["--no-exports", "--share=ipc", "--socket=x11", "--socket=pulseaudio", "--filesystem=host" ],
     "cleanup": [ "/cache", "/man", "/share/man", "/share/gtk-doc", "/share/devhelp", "*.la"],
-
     "build-options" : {
         "cflags": "-O2 -g",
         "cxxflags": "-O2 -g",
@@ -16,7 +15,6 @@
             "V": "1"
         }
     },
-    "cleanup": [],
     "modules": [
         {
             "name": "wayland-protocols",
@@ -85,6 +83,7 @@
         },
         {
             "name": "gobject-introspection",
+            "config-opts": ["--disable-static"],
             "sources": [
                 {
                     "type": "git",
@@ -94,6 +93,7 @@
         },
         {
             "name": "glib-networking",
+            "config-opts": ["--disable-static"],
             "sources": [
                 {
                     "type": "git",
@@ -134,6 +134,7 @@
         },
         {
             "name": "libsoup",
+            "config-opts": ["--disable-static"],
             "sources": [
                 {
                     "type": "git",
@@ -241,6 +242,7 @@
         },
         {
             "name": "libcroco",
+            "config-opts": ["--disable-static"],
             "sources": [
                 {
                     "type": "git",
@@ -250,6 +252,7 @@
         },
         {
             "name": "librsvg",
+            "config-opts": ["--disable-static"],
             "sources": [
                 {
                     "type": "git",
@@ -345,6 +348,7 @@
         },
         {
             "name": "libnotify",
+            "config-opts": ["--disable-static"],
             "sources": [
                 {
                     "type": "git",
@@ -366,6 +370,7 @@
         },
         {
             "name": "enchant",
+            "config-opts": ["--disable-static"],
             "sources": [
                 {
                     "type": "archive",

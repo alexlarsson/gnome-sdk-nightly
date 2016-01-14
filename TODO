@@ -1,3 +1,21 @@
 add webkitgtk
 convert sdk to platform
 make xdg-app-builder strip in /usr
+
+Cleanups:
+usr/lib/pkgconfig
+bunch of .pyc added for python 2.7
+usr/share/aclocal/
+usr/lib/gobject-introspection/giscanner
+usr/share/glib-2.0/codegen
+usr/share/gobject-introspection-1.0
+vala
+vapigen
+*.la??? should be cleaned up (usr/lib/gstreamer-1.0/libgstavi.la)
+remove entire apps => use cache
+*.a (remove from sdk too
+usr/lib/systemd
+usr/libexec/gvfsd*
+usr/libexec/dconf-service
+usr/share/aclocal
+usr/share/gdb/auto-load

@@ -60,17 +60,11 @@
             ]
         },
         {
-            "name": "adwaita-icon-theme",
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "git://git.gnome.org/adwaita-icon-theme"
-                }
-            ]
-        },
-        {
             "name": "cantarell-fonts",
             "config-opts": [ "--disable-source-rebuild"],
+            "post-install": [
+                "ln -s /usr/share/fontconfig/conf.avail/31-cantarell.conf /etc/fonts/conf.d/31-cantarell.conf"
+            ],
             "sources": [
                 {
                     "type": "git",
@@ -80,6 +74,8 @@
         },
         {
             "name": "glib",
+            /* This is needed because the system pcre does not support unicode, which should be fixed */
+            "config-opts": [ "--with-pcre=internal" ],
             "sources": [
                 {
                     "type": "git",
@@ -99,7 +95,7 @@
         },
         {
             "name": "glib-networking",
-            "config-opts": ["--disable-static"],
+            "config-opts": ["--disable-static", "--with-libproxy"],
             "sources": [
                 {
                     "type": "git",
@@ -303,6 +299,15 @@
             ]
         },
         {
+            "name": "adwaita-icon-theme",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/adwaita-icon-theme"
+                }
+            ]
+        },
+        {
             "name": "gstreamer",
             "config-opts": ["--disable-gtk-doc", "--enable-debug" ],
             "sources": [
@@ -319,6 +324,49 @@
                 {
                     "type": "git",
                     "url": "git://anongit.freedesktop.org/gstreamer/gst-plugins-base"
+                }
+            ]
+        },
+        {
+            "name": "cogl",
+            "config-opts": [  "--enable-cairo=yes",
+                              "--enable-cogl-pango=yes",
+                              "--enable-gdk-pixbuf=yes",
+                              "--enable-glx=yes",
+                              "--disable-gtk-doc",
+                              "--enable-introspection=yes",
+                              /* Disabled for now, as we need to add libgbm-dev to the freedesktop sdk */
+                              /*"--enable-kms-egl-platform", */
+                              "--enable-wayland-egl-platform",
+                              "--enable-wayland-egl-server",
+                              "--enable-xlib-egl-platform",
+                              "--enable-cogl-gst" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "branch": "cogl-1.22",
+                    "url": "git://git.gnome.org/cogl"
+                }
+            ]
+        },
+        {
+            "name": "clutter",
+            "config-opts": ["--enable-gdk-backend",
+                            "--enable-xinput",
+                            "--enable-evdev-input" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/clutter"
+                }
+            ]
+        },
+        {
+            "name": "clutter-gtk",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/clutter-gtk"
                 }
             ]
         },
@@ -462,6 +510,13 @@
         },
         {
             "name": "vte",
+            "build-options" : {
+                "cflags": "-O2 -g  -fPIE -DPIE",
+                "cxxflags": "-O2 -g  -fPIE -DPIE",
+                "env": {
+                    "LDFLAGS": "-Wl,-z,relro -Wl,-z,now -pie -lssp"
+                }
+            },
             "config-opts": ["--disable-gtk-doc",
                             "--disable-gnome-pty-helper",
                             "--disable-static",
@@ -472,6 +527,29 @@
                 {
                     "type": "git",
                     "url": "git://git.gnome.org/vte"
+                }
+            ]
+        },
+        {
+            "name": "webkitgtk4",
+            "build-options" : {
+                "cflags": "-O2 -g1",
+                "cxxflags": "-O2 -g1"
+            },
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "http://www.webkitgtk.org/releases/webkitgtk-2.11.1.tar.xz",
+                    "sha256": "2e13ca3ab384887cd687bc96aed857ba0191567e3fd579974f17b537e9cb2138"
+                },
+                {
+                    "type": "patch",
+                    "path": "webkitgtk-cmake-buildapi.patch"
+                }
+                {
+                    "type": "file",
+                    "path": "webkitgtk-configure",
+                    "dest-filename": "configure"
                 }
             ]
         },

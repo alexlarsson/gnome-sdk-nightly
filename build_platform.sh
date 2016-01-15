@@ -26,10 +26,13 @@ for module in $DEVEL_MODULES; do
 done
 
 cat filtered_files | while read file; do
-    [ -d "sdk/${file}" ] && continue
-    rm -f platform/${file}
-    mkdir -p `dirname platform/${file}`
-    cp -al sdk/${file} platform/${file}
+    if [ -d "sdk/${file}" ]; then
+        mkdir -p platform/${file}
+    else
+        rm -f platform/${file}
+        mkdir -p `dirname platform/${file}`
+        cp -al sdk/${file} platform/${file}
+    fi
 done
 
 cp metadata.platform platform/metadata.platform

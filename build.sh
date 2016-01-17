@@ -2,6 +2,7 @@
 
 set -e
 
+rm -rf sdk
 xdg-app-builder --ccache sdk org.gnome.Sdk.json
 cp metadata.sdk sdk/metadata.sdk
 mv sdk/files/manifest.json sdk/usr/

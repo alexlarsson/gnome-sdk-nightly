@@ -1,22 +1,34 @@
 {
-    "app-id": "org.gnome.Sdk",
+    "build-runtime": true,
+    "id": "org.gnome.Sdk",
+    "id-platform": "org.gnome.Platform",
     "branch": "master",
-    "runtime": "org.freedeskop.Platform",
+    "runtime": "org.freedesktop.Platform",
+    "sdk": "org.freedesktop.Sdk",
     "runtime-version": "1.2",
     "writable-sdk": true,
-    "sdk": "org.freedesktop.Sdk",
-    "finish-args": ["--no-exports", "--share=ipc", "--socket=x11", "--socket=pulseaudio", "--filesystem=host" ],
+    "metadata": "metadata.sdk",
+    "metadata-platform": "metadata.platform",
     "cleanup": [ "/cache",
                  "/man",
                  "/share/man",
                  "/share/gtk-doc",
                  "/share/devhelp",
-                 "/usr/lib/systemd",
+                 "/lib/systemd",
                  "*.la", "*.a"],
+    "cleanup-commands": [ "touch -d @0 /usr/share/fonts",
+                          "touch -d @0 /usr/share/fonts/*"
+                          "fc-cache -fs"
+                        ],
+    "cleanup-platform": [ "/include",
+                          "/share/aclocal",
+                          "/share/pkgconfig",
+                          "/lib/pkgconfig",
+                          "/share/vala"
+                        ],
     "build-options" : {
         "cflags": "-O2 -g",
         "cxxflags": "-O2 -g",
-        "prefix": "/usr",
         "env": {
             "V": "1"
         }
@@ -24,6 +36,7 @@
     "modules": [
         {
             "name": "wayland-protocols",
+            "cleanup-platform": [ "*" ],
             "sources": [
                 {
                     "type": "git",
@@ -33,6 +46,7 @@
         },
         {
             "name": "gnome-common",
+            "cleanup-platform": [ "*" ],
             "sources": [
                 {
                     "type": "git",
@@ -42,6 +56,7 @@
         },
         {
             "name": "yelp-xsl",
+            "cleanup-platform": [ "*" ],
             "config-opts": ["--disable-doc"],
             "sources": [
                 {
@@ -52,6 +67,7 @@
         },
         {
             "name": "yelp-tools",
+            "cleanup-platform": [ "*" ],
             "sources": [
                 {
                     "type": "git",
@@ -106,10 +122,11 @@
         {
             "name": "vala-bootstrap",
             "cleanup": [ "/bin/*-0.16",
-                         "/usr/lib/*-0.16*",
-                         "/usr/lib/pkgconfig/*",
-                         "/usr/include/vala-0.16",
-                         "/usr/share/vala-0.16" ],
+                         "/lib/*-0.16*",
+                         "/lib/pkgconfig/*",
+                         "/include/vala-0.16",
+                         "/share/vala-0.16" ],
+            "cleanup-platform": [ "*" ],
             "config-opts": [ "--disable-build-from-vala",
                              "--disable-vapigen" ],
             "sources": [
@@ -121,6 +138,7 @@
         },
         {
             "name": "vala",
+            "cleanup-platform": [ "*" ],
             "config-opts": [ "--enable-vapigen", "--enable-unversioned" ],
             "sources": [
                 {
@@ -132,7 +150,7 @@
         {
             "name": "dconf",
             "config-opts": ["--disable-static", "--disable-man"],
-            "cleanup": [ "/usr/libexec/dconf-service", "/usr/share/dbus-1/services/*" ],
+            "cleanup": [ "/libexec/dconf-service", "/share/dbus-1/services/*" ],
             "sources": [
                 {
                     "type": "git",

@@ -5,8 +5,11 @@
     "branch": "master",
     "runtime": "org.freedesktop.Platform",
     "sdk": "org.freedesktop.Sdk",
+    "initial-debug": "org.freedesktop.Debug",
     "runtime-version": "1.2",
     "writable-sdk": true,
+    "sdk-extensions": ["org.freedesktop.Debug", "org.freedesktop.Sdk.Locale"],
+    "platform-extensions": ["org.freedesktop.Platform.Locale"],
     "metadata": "metadata.sdk",
     "metadata-platform": "metadata.platform",
     "cleanup": [ "/cache",
@@ -41,6 +44,16 @@
                 {
                     "type": "git",
                     "url": "git://anongit.freedesktop.org/wayland/wayland-protocols"
+                }
+            ]
+        },
+        {
+            "name": "wayland",
+            "config-opts": ["--disable-static", "--disable-documentation"],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://anongit.freedesktop.org/wayland/wayland"
                 }
             ]
         },
@@ -353,8 +366,7 @@
                               "--enable-glx=yes",
                               "--disable-gtk-doc",
                               "--enable-introspection=yes",
-                              /* Disabled for now, as we need to add libgbm-dev to the freedesktop sdk */
-                              /*"--enable-kms-egl-platform", */
+                              "--enable-kms-egl-platform",
                               "--enable-wayland-egl-platform",
                               "--enable-wayland-egl-server",
                               "--enable-xlib-egl-platform",
@@ -557,8 +569,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://www.webkitgtk.org/releases/webkitgtk-2.11.1.tar.xz",
-                    "sha256": "2e13ca3ab384887cd687bc96aed857ba0191567e3fd579974f17b537e9cb2138"
+                    "url": "http://www.webkitgtk.org/releases/webkitgtk-2.11.4.tar.xz",
+                    "sha256": "47631d5d66967ebda2683c065706d5d91d4d886fc11f382eecd39451c71dfe3c"
                 },
                 {
                     "type": "patch",

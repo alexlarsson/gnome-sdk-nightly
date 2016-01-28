@@ -392,6 +392,15 @@
             ]
         },
         {
+            "name": "clutter-gst",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.gnome.org/clutter-gst"
+                }
+            ]
+        },
+        {
             "name": "clutter-gtk",
             "sources": [
                 {

@@ -436,6 +436,15 @@
             ]
         },
         {
+            "name": "libcanberra",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://git.0pointer.net/libcanberra.git"
+                }
+            ]
+        },
+        {
             "name": "p11-kit",
             "cleanup": [ "/bin"],
             "sources": [
